@@ -1,0 +1,27 @@
+{
+  "name": "test-express",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "axis": "^1.0.0",
+    "connect-redis": "^7.1.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.3",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.6.5",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "redis": "^4.6.11",
+    "strategy": "^1.1.1"
+  }
+}

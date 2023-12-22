@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        .container 
+            section.top 
+                h1 Hello, Welcome to Test
+            section.middle 
+                table 
+                    thead 
+                        tr 
+                            td id 
+                            td name 
+                            td info 
+                            td price 
+                            td discount
+                    tbody 
+                        for item in items
+                            tr
+                                td= item.id 
+                                td 
+                                    a(href='/item/'+item.id)= item.name 
+                                td= item.info 
+                                td= item.price 
+                                td= item.discount
+                        else 
+                            tr 
+                                td sorry, no items!
+            section.bottom
+                button(type="button", onclick="location.href='/item/info'") add Item!

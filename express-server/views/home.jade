@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        if user_id != ""
+            a(href="/mypage") My Page 
+            br
+            a(href="/api/logout") logout 
+        else
+            a(href="/login") login
+        br
+        a(href="/items") all Item

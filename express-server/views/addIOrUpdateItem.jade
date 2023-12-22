@@ -1,0 +1,28 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet")
+        title #{title}
+    body 
+        div.container
+            section.top
+                h1 Welcome to #{title}
+            section.middle 
+                //- 상품추가인 경우
+                if item == ""
+                    form(action="/item", method="post")
+                        input(type="text", placeholder="item name")
+                        input(type="text", placeholder="item info")
+                        input(type="text", placeholder="price")
+                        input(type="text", placeholder="discount(not required)")
+                        button(type="submit") Add Item
+                //- 업데이트인 경우
+                else 
+                    form(action="/item", method="post")
+                        input(type="text", placeholder="item name", value='#{item.name}')
+                        input(type="text", placeholder="item info", value='#{item.info}')
+                        input(type="text", placeholder="price", value='#{item.price}')
+                        input(type="text", placeholder="discount(not required)", value="#{item.discount}")
+                        button(type="submit") Update Item
+            section.bottom

@@ -1,0 +1,13 @@
+body{
+    margin: 0 auto;
+}
+
+.container {
+    width: 50%;
+    height: 50%;
+    border: thick double black;
+    border-radius: 30px;
+}
+
+.item-info {
+}

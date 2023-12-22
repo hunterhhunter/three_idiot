@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title allItem
+        link(rel="stylesheet", type="text/css", href="/css/showItem.css")
+    body 
+        .container 
+            h3 #{item.name}
+            .item-info 
+                p#price #{item.price}
+                p#discount -#{item.discount}%
+                - var real = item.price * (100 - item.discount) / 100
+                p#realPrice #{real}
+                
+            h4#info #{item.info}
+        .bottom
+            button#update-item(type="button", onclick="location.href='/item/info/#{item.id}'") 수정
+            button#delete-item(type="button", onclick="location.href='/item/info/#{item.id}'") 삭제
+        
