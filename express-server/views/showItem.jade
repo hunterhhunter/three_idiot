@@ -16,6 +16,9 @@ html(lang="en")
                 
             h4#info #{item.info}
         .bottom
-            button#update-item(type="button", onclick="location.href='/item/info/#{item.id}'") 수정
-            button#delete-item(type="button", onclick="location.href='/item/info/#{item.id}'") 삭제
+            a#link(href="") 쿠팡 사이트로 가기
+            form.basket-form(action="/api/basket", method="post")
+                input#itemId(type="hidden", name="itemId", value=item.id)
+                button(type="submit") 장바구니에 넣기
+            
         

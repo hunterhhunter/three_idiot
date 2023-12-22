@@ -6,42 +6,33 @@ var conn = db.init();
 
 // 상품 상세 조회
 router.get('/items/:id', (req, res)=> {
-    var sql = "select * from board where id=" + req.params.id;
+    var sql = "select * from items where id=" + req.params.id;
     conn.query(sql, (err, result) => {
         if (err) console.log("query is not excuted : " + err);
         else res.send(result);
     })
 })
 
-// 상품 등록
-router.post("/item", (req, res) => {
-    var body = req.body;
-    var sql = "insert into items (name, info, price, discount) values(?,?,?,?)";
-    var params = [body.name, body.info, body.price, (!body.discount ? 0 : body.discount)];
-    conn.query(sql, params, (err) => {
-        if(err) console.log("query is not excuted : " + err)
-        else res.sendStatus(200);
-    });
-})
-
-// 상품 수정
-router.post("/item/:id", (req, res) => {
-    var body = req.body;
-    var sql = "update items set name=?, info=?, price=?, discount=? where id=" + req.params.id;
-    var params = [body.name, body.info, body.price, body.discount];
-    conn.query(sql, params, (err) => {
-        if(err) console.log("query is not excuted : " + err)
-        else res.sendStatus(200);
+router.post('/basket', (req, res) => {
+    var sql = "select basket from users where id=?"
+    conn.query(sql, [req.user.ID], (err, result) => {
+        if(err) console.log("query is not excuted : " + err);
+        else {
+            var basketArray = JSON.parse(result[0]) // 배열 자료형
+            basketArray[basketArray.length] = req.body.itemId 
+            sql = "UPDATE users SET basket=? WHERE id=?"
+            conn.query(sql, [JSON.stringify(basketArray), req.user.ID], (err, result) => {
+                if(err) console.log("query is not excuted : " + err);
+                else {
+                    res.write(`<script>var result = confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')</script>`);
+                    res.write(`<script>if(result){window.location=\"/mypage/basket\"}else{window.location=\"/item:${req.body.itemId}\"}</script>`);
+                }
+            })
+        }
     })
 })
 
-// 상품 삭제
-router.delete("/item/:id", (req, res) => {
-    var sql = "delete from board where id=" + req.params.id;
-    conn.query(sql, (err) => {
-        if(err) console.log("query is not excuted : " + err)
-        else res.sendStatus(200);
-    })
-})
+
+
 
 module.exports = router
