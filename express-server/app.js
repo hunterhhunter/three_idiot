@@ -8,9 +8,10 @@ const session = require('express-session')
 var passport = require('passport')
 
 // router 설정
-var indexRouter = require('./routes/view');
+var viewRouter = require('./routes/view');
 var itemApiRouter = require('./routes/itemApi');
 var userApiRouter = require('./routes/userApi')
+var coupangRouter = require('./routes/coupang')
 
 // express() 앱 실행
 var app = express();
@@ -39,9 +40,10 @@ app.use(passport.session())
 require('./config/passport')(app, passport)
 
 // path 설정
-app.use('/', indexRouter);
+app.use('/', viewRouter);
 app.use('/api', itemApiRouter);
 app.use('/user', userApiRouter)
+app.use('/coupang', coupangRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) { // 기본 경로 or /users 말고 다른 경로로 진입했을 경우 실행
@@ -57,6 +59,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+process.on("uncaughtException", function(err) {
+	console.error("uncaughtException (Node is alive)", err);
 });
 
 module.exports = app;
